@@ -2,6 +2,10 @@ import type { UserConfig, ConfigEnv } from 'vite'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
 
 type Recordable<T = any> = Record<string, T>;
 
@@ -46,17 +50,25 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
 
   return {
     base: VITE_PUBLIC_PATH,
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+    ],
     resolve: {
       alias: [
+        // /@/xxxx => src/xxxx
         { find: /\/@\//, replacement: pathResolve('src') + '/' },
-        { find: /\/#\//, replacement: pathResolve('types') + '/' },
       ]
     },
     server: {
       // 监听所有IP，包含0.0.0.0
       host: true,
-      open: true,
+      // open: true,
       port: VITE_PORT,
     },
     build: {
@@ -72,6 +84,14 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       // Turning off brotliSize display can slightly reduce packaging time
       brotliSize: false,
       chunkSizeWarningLimit: 1000,
+    },
+    css: {
+      preprocessorOptions: {
+        sass: {
+          implementation: require('sass'), // This line must in sass option
+          // additionalData: `@import "~@/styles/variables.scss"`
+        },
+      },
     },
   }
 })
