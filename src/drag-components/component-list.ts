@@ -17,7 +17,7 @@ const list = [
     component: 'v-text',
     label: '文字',
     propValue: '双击编辑文字',
-    icon: 'wenben',
+    icon: 'text-tool',
     style: {
       width: 200,
       height: 22,
@@ -52,7 +52,7 @@ const list = [
   {
     component: 'Picture',
     label: '图片',
-    icon: 'la:image',
+    icon: 'image',
     propValue: import('/@/assets/title.jpg'),
     style: {
       width: 300,
@@ -64,7 +64,7 @@ const list = [
     component: 'rect-shape',
     label: '矩形',
     propValue: '&nbsp;',
-    icon: 'juxing',
+    icon: 'rectangle',
     style: {
       width: 200,
       height: 200,

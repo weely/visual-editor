@@ -17,7 +17,7 @@ function handleDragStart() {
       :data-index="index"
     >
       <!-- <Icon :icon="item.icon" class="icon" /> -->
-      <svg-icon :iconClass="item.icon" className="item.icon" class="icon" />
+      <svg-icon :name="item.icon" class="icon" :class-name="`icon-${item.icon}`"/>
       <span>{{ item.label }}</span>
     </div>
   </div>
@@ -41,6 +41,8 @@ function handleDragStart() {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1rem;
+    line-height: 1.5;
 
     &:active {
       cursor: grabbing;
@@ -49,11 +51,6 @@ function handleDragStart() {
     .icon {
       margin-right: 4px;
       font-size: 20px;
-    }
-
-    .icon-wenben,
-    .icon-tupian {
-      font-size: 18px;
     }
   }
 }

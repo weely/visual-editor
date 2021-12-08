@@ -5,7 +5,8 @@ import { resolve } from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-
+import SvgIconsPlugin from 'vite-plugin-svg-icons'
+import path from 'path'
 
 type Recordable<T = any> = Record<string, T>;
 
@@ -42,23 +43,15 @@ function wrapperEnv(envConf: Recordable) {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
-  const root = process.cwd();
-  const env = loadEnv(mode, root);
-  const viteEnv = wrapperEnv(env);
+  const root = process.cwd()
+  const env = loadEnv(mode, root)
+  const viteEnv = wrapperEnv(env)
 
-  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_DROP_CONSOLE } = viteEnv;
+  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_DROP_CONSOLE } = viteEnv
+  const isBuild = command === 'build'
 
   return {
     base: VITE_PUBLIC_PATH,
-    plugins: [
-      vue(),
-      AutoImport({
-        resolvers: [ElementPlusResolver()],
-      }),
-      Components({
-        resolvers: [ElementPlusResolver()],
-      }),
-    ],
     resolve: {
       alias: [
         // /@/xxxx => src/xxxx
@@ -85,6 +78,21 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       brotliSize: false,
       chunkSizeWarningLimit: 1000,
     },
+    plugins: [
+      vue(),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+      SvgIconsPlugin({
+        iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')],
+        svgoOptions: isBuild,
+        // default
+        symbolId: 'icon-[dir]-[name]',
+      })
+    ],
     css: {
       preprocessorOptions: {
         sass: {

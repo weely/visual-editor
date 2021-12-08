@@ -6,6 +6,7 @@ import './styles/common.scss'
 import ElementPlus from './element-plus'
 import Icon from './icons'
 import store from './store'
+import 'virtual:svg-icons-register'
 import App from './App.vue'
 
 const app = createApp(App)

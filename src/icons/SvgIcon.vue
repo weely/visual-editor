@@ -1,32 +1,34 @@
 <script setup lang="ts">
-import { isExternal } from '/@/utils/validate'
-import { toRefs, computed } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
-  iconClass: {
+  prefix: {
     type: String,
-    required: true
+    default: 'icon',
+  },
+  name: {
+    type: String,
+    required: true,
   },
   className: {
     type: String,
     default: ''
-  }
+  },
+  spin: {
+    type: Boolean,
+    default: false,
+  },
 })
 
-const { iconClass, className } = toRefs(props)
-const isExternalUrl = computed(():boolean => isExternal(iconClass.value))
-const iconName = computed(():string => `#icon-${iconClass.value}`)
-const svgClass = computed(():string => className.value ?  `svg-icon ${className.value}` : 'svg-icon')
-const styleExternalIcon = computed(() => ({
-  mask: `url(${iconClass.value}) no-repeat 50% 50%`,
-  '-webkit-mask': `url(${iconClass.value}) no-repeat 50% 50%`
-}))
+const symbolId = computed(() => `#${props.prefix}-${props.name}`);
+const svgClass = computed(() => props.className ? `svg-icon ${props.className}` : 'svg-icon')
 
 </script>
 <template>
-  <div v-if="isExternalUrl" :style="styleExternalIcon" class="svg-external-icon svg-icon" v-bind="$attrs" />
-  <svg v-else :class="svgClass" aria-hidden="true" v-bind="$attrs">
-    <use :href="iconName" />
+  <svg
+    :class="[svgClass, spin && 'svg-icon-spin']"
+    aria-hidden="true">
+    <use :href="symbolId" />
   </svg>
 </template>
 <style lang="scss" scoped>
@@ -37,10 +39,7 @@ const styleExternalIcon = computed(() => ({
   fill: currentColor;
   overflow: hidden;
 }
-
-.svg-external-icon {
-  background-color: currentColor;
-  mask-size: cover!important;
-  display: inline-block;
+.svg-icon-spin {
+  animation: loadingCircle 1s infinite linear;
 }
 </style>
