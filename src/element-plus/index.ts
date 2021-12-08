@@ -1,7 +1,14 @@
 import {
   ElButton,
   ElTabs,
-  ElTabPane
+  ElTabPane,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElSelect,
+  ElOptionGroup,
+  ElOption,
+  ElColorPicker
 } from 'element-plus'
 import type { App } from 'vue'
 
@@ -12,6 +19,13 @@ function install(app: App) {
   app.use(ElButton)
   app.use(ElTabs)
   app.use(ElTabPane)
+  app.use(ElForm)
+  app.use(ElFormItem)
+  app.use(ElInput)
+  app.use(ElSelect)
+  app.use(ElOptionGroup)
+  app.use(ElOption)
+  app.use(ElColorPicker)
 }
 
 export default {

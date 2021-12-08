@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import ToolBar from '/@/components/Toolbar.vue'
 import ComponentList from '/@/components/ComponentList.vue'
+import Editor from '/@/components/Editor/index.vue'
+import AttrList from '/@/components/AttrList.vue'
+import EventList from '/@/components/EventList.vue'
+import AnimationList from '/@/components/AnimationList.vue'
 import { ref, reactive } from 'vue'
 
 const activeName = ref('attr')
@@ -22,7 +26,7 @@ function deselectCurComponent(){
 
 <template>
   <div class="home">
-    <Toolbar />
+    <tool-bar />
 
     <main>
       <!-- 左侧组件列表 -->
@@ -40,15 +44,15 @@ function deselectCurComponent(){
       <section class="right">
         <el-tabs v-model="activeName">
           <el-tab-pane label="属性" name="attr">
-            <AttrList v-if="curComponent" />
+            <attr-list v-if="curComponent" />
             <p v-else class="placeholder">请选择组件</p>
           </el-tab-pane>
           <el-tab-pane label="动画" name="animation">
-            <AnimationList v-if="curComponent" />
+            <animation-list v-if="curComponent" />
             <p v-else class="placeholder">请选择组件</p>
           </el-tab-pane>
           <el-tab-pane label="事件" name="events">
-            <EventList v-if="curComponent" />
+            <event-list v-if="curComponent" />
             <p v-else class="placeholder">请选择组件</p>
           </el-tab-pane>
         </el-tabs>

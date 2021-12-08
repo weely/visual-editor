@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import componentList from '/@/drag-components/component-list'
-import SvgIcon from '../icons/SvgIcon.vue'; // 左侧列表数据
 
 function handleDragStart() {
 
@@ -16,7 +15,6 @@ function handleDragStart() {
       draggable
       :data-index="index"
     >
-      <!-- <Icon :icon="item.icon" class="icon" /> -->
       <svg-icon :name="item.icon" class="icon" :class-name="`icon-${item.icon}`"/>
       <span>{{ item.label }}</span>
     </div>
