@@ -4,6 +4,7 @@ interface Style {
   left: number
   width: number
   height: number
+  rotate: number
 }
 
 // 选中区域包含的组件以及区域位移信息

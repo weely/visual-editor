@@ -4,7 +4,7 @@ import { EditMode } from '/@/enums/appEnum'
 
 interface AppStore {
   editMode: EditMode,
-  canvasStyleData: CanvasStyle,
+  canvasStyle: CanvasStyle,
   componentData: Array<any>,
   curComponent: any,
   curComponentIndex: number | undefined,
@@ -14,7 +14,7 @@ interface AppStore {
 export const appStore = defineStore('app', {
   state: (): AppStore => ({
     editMode: EditMode.edit, // 编辑器模式 edit preview
-    canvasStyleData: { // 页面全局数据
+    canvasStyle: { // 页面全局数据
       width: 1200,
       height: 740,
       scale: 100,
@@ -34,7 +34,7 @@ export const appStore = defineStore('app', {
       this.editMode = mode
     },
     setCanvasStyle(style: CanvasStyle): void {
-      this.canvasStyleData = style
+      this.canvasStyle = style
     },
     setCurComponent(component: any, index?: number | undefined) {
       this.curComponent = component

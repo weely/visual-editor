@@ -18,7 +18,7 @@ const needToChange = readonly([
 const scale = ref('100%')
 const timer = ref(null)
 const { areaData, editor } = storeToRefs(composeStore())
-const { curComponent, canvasStyleData } = storeToRefs(appStore())
+const { curComponent, canvasStyle } = storeToRefs(appStore())
 
 function undo() {
 }
@@ -77,9 +77,9 @@ function handlePreviewChange() {
       <el-button @click="unlock" :disabled="!curComponent || !curComponent.isLock">解锁</el-button>
       <div class="canvas-config">
         <span>画布大小</span>
-        <input v-model="canvasStyleData.width" />
+        <input v-model="canvasStyle.width" />
         <span>*</span>
-        <input v-model="canvasStyleData.height" />
+        <input v-model="canvasStyle.height" />
       </div>
       <div class="canvas-config">
         <span>画布比例</span>
