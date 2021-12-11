@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import componentList from '/@/drag-components/component-list'
+import componentList from '@/drag-components/component-list'
 
-function handleDragStart() {
-
+function handleDragStart(e: DragEvent | any) {
+  e.dataTransfer?.setData('index', e.target?.dataset.index)
 }
 </script>
 
@@ -12,7 +12,7 @@ function handleDragStart() {
       v-for="(item, index) in componentList"
       :key="index"
       class="list"
-      draggable
+      draggable="true"
       :data-index="index"
     >
       <svg-icon :name="item.icon" class="icon" :class-name="`icon-${item.icon}`"/>

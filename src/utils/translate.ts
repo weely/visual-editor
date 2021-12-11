@@ -1,5 +1,5 @@
-import type { Point } from '/@/types/app'
-import type { Style } from '/@/types/store'
+import type { Point } from '@/types/app'
+import type { Style } from '@/types/store'
 
 /**
  * 角度转弧度

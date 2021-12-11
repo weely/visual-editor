@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-import type { CanvasStyle } from '/@/types/store'
-import { EditMode } from '/@/enums/appEnum'
+import { Ref, ref } from 'vue'
+import type { CanvasStyle } from '@/types/store'
+import { EditMode } from '@/enums/appEnum'
 
 interface AppStore {
   editMode: EditMode,
@@ -11,7 +12,7 @@ interface AppStore {
   isClickComponent: boolean
 }
 
-export const appStore = defineStore('app', {
+export const useAppStore = defineStore('app', {
   state: (): AppStore => ({
     editMode: EditMode.edit, // 编辑器模式 edit preview
     canvasStyle: { // 页面全局数据
@@ -43,7 +44,7 @@ export const appStore = defineStore('app', {
     setComponentData(componentData: Array<any>) {
       this.componentData = componentData
     },
-    addComponent(component: any, index: number | undefined) {
+    addComponent(component: any, index?: number) {
       if (index !== undefined) {
         this.componentData.splice(index, 0, component)
       } else {

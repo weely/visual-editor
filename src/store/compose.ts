@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
-import type { AreaData } from '/@/types/store'
-import { querySelector } from '/@/utils/index'
+import type { AreaData } from '@/types/store'
+import { querySelector } from '@/utils/index'
 
 interface ComposeStore {
   areaData: AreaData,
-  editor: any
+  editorDom: any
 }
 
-export const composeStore = defineStore('compose', {
+export const useComposeStore = defineStore('compose', {
   state: (): ComposeStore => ({
     areaData: { // 选中区域包含的组件以及区域位移信息
       style: {
@@ -15,10 +15,11 @@ export const composeStore = defineStore('compose', {
         left: 0,
         width: 0,
         height: 0,
+        rotate: 0
       },
       components: [],
     },
-    editor: null,
+    editorDom: null,
   }),
   getters: {
 
@@ -27,8 +28,8 @@ export const composeStore = defineStore('compose', {
     setAreaData(state: AreaData): void {
       this.areaData = state
     },
-    getEditor(selector: any): void {
-      this.editor = querySelector(selector)
+    setEditor(): void {
+      this.editorDom = querySelector('#editor')
     },
   },
 })

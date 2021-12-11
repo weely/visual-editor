@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import generateID from '/@/utils/generateID'
-import toast from '/@/utils/toast'
-import { ref, reactive, readonly, computed } from 'vue'
+import { ref, readonly, computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import { composeStore } from '/@/store/compose'
-import { appStore } from '/@/store/app'
+import { useComposeStore } from '@/store/compose'
+import { useAppStore } from '@/store/app'
+import generateID from '@/utils/generateID'
+import toast from '@/utils/toast'
 
 const isShowPreview = ref(false)
 const needToChange = readonly([
@@ -17,8 +17,8 @@ const needToChange = readonly([
 ])
 const scale = ref('100%')
 const timer = ref(null)
-const { areaData, editor } = storeToRefs(composeStore())
-const { curComponent, canvasStyle } = storeToRefs(appStore())
+const { areaData } = storeToRefs(useComposeStore())
+const { curComponent, canvasStyle } = storeToRefs(useAppStore())
 
 function undo() {
 }

@@ -1,5 +1,6 @@
+import type { StrKObj } from '@/types/app'
 
-interface Style {
+interface Style extends StrKObj {
   top: number
   left: number
   width: number
@@ -18,4 +19,3 @@ export interface CanvasStyle {
   height: number
   scale: number
 }
-

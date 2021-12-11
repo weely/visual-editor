@@ -1,3 +1,5 @@
+import defaultImg from '@/assets/title.jpg'
+
 // 公共样式
 export const commonStyle = {
   rotate: 0,
@@ -50,10 +52,10 @@ const list = [
     },
   },
   {
-    component: 'Picture',
+    component: 'v-img',
     label: '图片',
     icon: 'image',
-    propValue: import('/@/assets/title.jpg'),
+    propValue: defaultImg,
     style: {
       width: 300,
       height: 200,
@@ -61,7 +63,7 @@ const list = [
     },
   },
   {
-    component: 'rect-shape',
+    component: 'v-rect',
     label: '矩形',
     propValue: '&nbsp;',
     icon: 'rectangle',
