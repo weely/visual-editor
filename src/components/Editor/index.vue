@@ -69,6 +69,7 @@ onMounted(() => {
     <!-- 页面组件列表 -->
     <shape
       v-for="(item, index) in componentList"
+      :defaultStyle="item.style"
       :style="getShapeStyle(item.style)"
       :key="item.id"
       :active="item.id === curComponent?.id"
@@ -81,7 +82,7 @@ onMounted(() => {
         :style="getComponentStyle(item.style)"
         :propValue="item.propValue"
         :element="item"
-        :id="'component' + item.id" />
+        :id="'component-' + item.id" />
     </shape>
   </div>
 </template>

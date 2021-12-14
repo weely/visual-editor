@@ -21,17 +21,17 @@ const appStore = useAppStore()
 
 function handleDragOver(e: DragEvent) {
   e.preventDefault()
-  e.dataTransfer.dropEffect = 'copy'
+  e.dataTransfer!.dropEffect = 'copy'
 }
 function handleDrop(e: DragEvent) {
   e.preventDefault()
   e.stopPropagation()
 
-  const index = e.dataTransfer.getData('index')
+  const index = e.dataTransfer!.getData('index')
   const rectInfo = editorDom?.value.getBoundingClientRect()
 
   if (index) {
-    const component = deepCopy(componentList[index])
+    const component = deepCopy(componentList![+index])
     component.style.top = e.clientY - rectInfo.y
     component.style.left = e.clientX - rectInfo.x
     component.id = generateID()

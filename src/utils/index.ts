@@ -40,14 +40,14 @@ export function getStyle(style: Style, filter:Array<string> = []) {
   const result: StrKObj = {}
   Object.keys(style).forEach(key => {
     if (!filter.includes(key)) {
-      if (key != 'rotate') {
+      if (key === 'rotate') {
+        result.transform = key + '(' + style[key] + 'deg)'
+      } else {
         result[key] = style[key]
 
         if (needUnit.includes(key)) {
           result[key] += 'px'
         }
-      } else {
-        result.transform = key + '(' + style[key] + 'deg)'
       }
     }
   })

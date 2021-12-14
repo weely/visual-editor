@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { Ref, ref } from 'vue'
-import type { CanvasStyle } from '@/types/store'
+import type { CanvasStyle, OptionalStyle } from '@/types/store'
 import { EditMode } from '@/enums/appEnum'
 
 interface AppStore {
@@ -9,7 +9,7 @@ interface AppStore {
   componentData: Array<any>,
   curComponent: any,
   curComponentIndex: number | undefined,
-  isClickComponent: boolean
+  componentIsActive: boolean
 }
 
 export const useAppStore = defineStore('app', {
@@ -25,12 +25,15 @@ export const useAppStore = defineStore('app', {
     curComponentIndex: undefined,
     // 点击画布时是否点中组件，主要用于取消选中组件用。
     // 如果没点中组件，并且在画布空白处弹起鼠标，则取消当前组件的选中状态
-    isClickComponent: false,
+    componentIsActive: false,
   }),
   getters: {
 
   },
   actions: {
+    setComponentStatus(status: boolean): void{
+      this.componentIsActive = status
+    },
     setEditMode(mode: EditMode): void {
       this.editMode = mode
     },
@@ -40,6 +43,12 @@ export const useAppStore = defineStore('app', {
     setCurComponent(component: any, index?: number | undefined) {
       this.curComponent = component
       this.curComponentIndex = index
+    },
+    setShapeStyle(style: OptionalStyle): void{
+      // top, left, width, height, rotate
+      Object.keys(style).forEach((k: string) => {
+        this.curComponent.style[k] = style[k]
+      })
     },
     setComponentData(componentData: Array<any>) {
       this.componentData = componentData

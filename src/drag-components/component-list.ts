@@ -4,6 +4,8 @@ import defaultImg from '@/assets/title.jpg'
 export const commonStyle = {
   rotate: 0,
   opacity: 1,
+  top: 0,
+  left: 0
 }
 
 export const commonAttr = {
