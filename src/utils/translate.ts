@@ -134,3 +134,15 @@ export function computeCanvasStyleByScale(scale: any, value: number) {
 export function toPercent(val: number) {
   return val * 100 + '%'
 }
+
+export function rotateTransform(matrix: Array<Array<any>>){
+
+}
+
+export function scaleTransform(matrix: Array<Array<any>>){
+
+}
+
+export function TranslateTransform(matrix: Array<Array<any>>){
+
+}

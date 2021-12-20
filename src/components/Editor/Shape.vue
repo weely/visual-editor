@@ -59,29 +59,29 @@ const angleToCursor = readonly([
   { start: 293, end: 338, cursor: 'w' },
 ])
 
-function getPointStyle(point: string) {
+function getPointStyle(direction: string) {
   const { width, height } = props.defaultStyle || {}
-  const hasT = /t/.test(point)
-  const hasB = /b/.test(point)
-  const hasL = /l/.test(point)
-  const hasR = /r/.test(point)
+  const isT = /t/.test(direction)
+  const isB = /b/.test(direction)
+  const isL = /l/.test(direction)
+  const isR = /r/.test(direction)
   let newLeft = 0
   let newTop = 0
 
   // 四个角的点
-  if (point.length === 2) {
-    newLeft = hasL ? 0 : width
-    newTop = hasT ? 0 : height
+  if (direction.length === 2) {
+    newLeft = isL ? 0 : width
+    newTop = isT ? 0 : height
   } else {
     // 上下两点的点，宽度居中
-    if (hasT || hasB) {
+    if (isT || isB) {
       newLeft = width / 2
-      newTop = hasT ? 0 : height
+      newTop = isT ? 0 : height
     }
 
     // 左右两边的点，高度居中
-    if (hasL || hasR) {
-      newLeft = hasL ? 0 : width
+    if (isL || isR) {
+      newLeft = isL ? 0 : width
       newTop = Math.floor(height / 2)
     }
   }
@@ -91,7 +91,7 @@ function getPointStyle(point: string) {
     marginTop: '-4px',
     left: `${newLeft}px`,
     top: `${newTop}px`,
-    cursor: cursors.value[point],
+    cursor: cursors.value[direction],
   }
 
   return style
@@ -278,26 +278,26 @@ function handleMouseDownOnPoint(point: string, e: any) {
 
   const needLockProportion = isNeedLockProportion()
   const move = (moveEvent: MouseEvent) => {
-      // 第一次点击时也会触发 move，所以会有“刚点击组件但未移动，组件的大小却改变了”的情况发生
-      // 因此第一次点击时不触发 move 事件
-      if (isFirst) {
-        isFirst = false
-        return
-      }
+    // 第一次点击时也会触发 move，所以会有“刚点击组件但未移动，组件的大小却改变了”的情况发生
+    // 因此第一次点击时不触发 move 事件
+    if (isFirst) {
+      isFirst = false
+      return
+    }
 
-      needSave = true
-      const curPositon = {
-        x: moveEvent.clientX - editorRectInfo.left,
-        y: moveEvent.clientY - editorRectInfo.top,
-      }
+    needSave = true
+    const curPositon = {
+      x: moveEvent.clientX - editorRectInfo.left,
+      y: moveEvent.clientY - editorRectInfo.top,
+    }
 
-      calculateComponentPositonAndSize(point, style, curPositon, proportion, needLockProportion, {
-        center,
-        curPoint,
-        symmetricPoint,
-      })
+    calculateComponentPositonAndSize(point, style, curPositon, proportion, needLockProportion, {
+      center,
+      curPoint,
+      symmetricPoint,
+    })
 
-      appStore.setShapeStyle(style)
+    appStore.setShapeStyle(style)
   }
 
   const up = () => {

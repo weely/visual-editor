@@ -1,4 +1,3 @@
-/* eslint-disable no-lonely-if */
 import type { Point, StrKObj } from '@/types/app'
 import type { Style } from '@/types/store'
 import { calculateRotatedPointCoordinate, getCenterPoint } from './translate'
